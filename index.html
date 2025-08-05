@@ -1,0 +1,1486 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小苏的小窝</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: black;
+            background: linear-gradient(to bottom, #000000 0%, #5788fe 100%);
+            font-family: 'Questrial', 'Noto Serif SC';
+            color: white;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* 圆形头像样式 */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            position: absolute;
+            top: -140px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+        }
+
+        /* 标题容器调整 */
+        .title-container {
+            position: relative;
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        /* 立体感大标题 */
+        .title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow:
+                2px 2px 0 #fff,
+                4px 4px 0 rgba(0,0,0,0.1),
+                6px 6px 10px rgba(0,0,0,0.15);
+            margin: 15px 0;
+            letter-spacing: 4px;
+            color: #FFF;
+        }
+
+        /* 蓝粉渐变文字效果 */
+        .gradient-text-blue-pink {
+            background: linear-gradient(to right, #4facfe, #00f2fe, #f067b4, #ff7eb3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+
+        .filter {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #fe5757;
+            animation: colorChange 30s ease-in-out infinite;
+            animation-fill-mode: both;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes colorChange {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: .9;
+            }
+        }
+
+        .landscape {
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://img.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_107791-7397.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            opacity: 0.3;
+            z-index: -2;
+        }
+
+        .content{
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            padding-top: 40px;
+            z-index: 9999;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 100px;
+        }
+
+        .content .hr{
+            width: 50%;
+            margin: 20px auto;
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            height: 1px;
+        }
+
+        .content .discription{
+            font-size: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+
+        .cover-navigation {
+            margin: 30px;
+        }
+
+        nav {
+            display: inline-block;
+            position: relative;
+        }
+
+        .navigation {
+            display: inline-block;
+            position: relative;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        .navigation__item {
+            display: inline-block;
+            line-height: 1em;
+            padding: 1em 0;
+        }
+
+        .navigation__item a {
+            position: relative;
+            color: #FFF;
+            opacity: .8;
+            transition: all .3s;
+            padding: 12px 25px;
+            border: 1px solid #fff;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: none;
+            -webkit-font-smoothing: antialiased;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .navigation__item a:hover {
+            color: #FFF;
+            background: #FF7F00;
+            border-color: #FF7F00;
+            opacity: 1;
+            transition: all .3s;
+        }
+
+        ol, ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        .icp{
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10000;
+        }
+
+        .icpnum{
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        /* 左侧导航栏 */
+        .left-navigation {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10000;
+        }
+
+        .left-navigation .navigation__item {
+            display: block;
+            margin: 15px 0;
+        }
+
+        .left-navigation .navigation__item a {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        /* 礼物展示区域 */
+        .gifts-section {
+            margin: 50px auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(to right, #ff7eb3, #4facfe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .gift-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .gift-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4facfe, #ff7eb3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .gift-name {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .supporter {
+            font-size: 1.1rem;
+            color: #ffcc00;
+            margin-bottom: 5px;
+        }
+
+        .gift-amount {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* 艺术时钟 */
+        .art-clock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .clock-time {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #4facfe, #ff7eb3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .clock-date {
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        /* 音乐入口按钮 */
+        .music-entry {
+            position: fixed;
+            bottom: 80px;
+            right: 50px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4facfe, #ff7eb3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 10000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .music-entry:hover {
+            transform: scale(1.1);
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px;
+            z-index: 20000;
+            backdrop-filter: blur(10px);
+            display: none;
+            max-width: 90%;
+            width: 500px;
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        .modal h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .modal .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: #333;
+        }
+
+        .modal-text {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 19000;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* 后台管理面板 */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 30000;
+            padding: 20px;
+            transition: right 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255,255,255,0.2);
+            overflow-y: auto;
+        }
+
+        .admin-panel.show {
+            right: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            background: linear-gradient(to right, #4facfe, #ff7eb3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .admin-section {
+            margin-bottom: 25px;
+        }
+
+        .admin-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4facfe, #ff7eb3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .admin-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #4facfe, #ff7eb3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .left-navigation {
+                display: none;
+            }
+
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .art-clock {
+                top: 80px;
+                right: 10px;
+                font-size: 0.8rem;
+            }
+
+            .clock-time {
+                font-size: 1.8rem;
+            }
+
+            .gift-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .music-entry {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* 音乐播放器样式 */
+        .music-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 20000;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .music-section.show {
+            display: block;
+        }
+
+        .music-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            font-size: 2em;
+            position: relative;
+        }
+
+        .close-music {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: white;
+        }
+
+        .song-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .song-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .song-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .song-item.playing {
+            background: linear-gradient(45deg, rgba(79, 172, 254, 0.5), rgba(255, 126, 179, 0.5));
+        }
+
+        .song-item.playing::after {
+            content: "\f28b"; /* 音符图标 */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .song-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+        .song-info {
+            flex-grow: 1;
+        }
+
+        .song-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .song-artist {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .player-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            z-index: 30000;
+        }
+
+        .current-song {
+            flex-grow: 1;
+            color: white;
+            padding: 0 20px;
+            min-width: 200px;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-container {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #4facfe, #ff7eb3);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8em;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            min-width: 150px;
+            padding: 0 20px;
+        }
+
+        .volume-slider {
+            width: 100px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 艺术时钟 -->
+    <div class="art-clock" id="artClock">
+        <div class="clock-time" id="clockTime">00:00:00</div>
+        <div class="clock-date" id="clockDate">2023年1月1日 星期一</div>
+    </div>
+
+    <!-- 后台管理按钮 -->
+    <div class="admin-btn" id="adminBtn">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content">
+        <div class="title-container">
+            <img src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/fb24803600417269515458df3bae1d9e.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_1920%2ch_1080"
+                 alt="小苏头像" class="profile-avatar">
+            <div class="title gradient-text-blue-pink">小苏的小窝</div>
+        </div>
+
+        <div class="discription gradient-text-blue-pink">盛年不重来，一日难再晨。及时当勉励，岁月不待人。</div>
+        <hr class="hr">
+
+        <!-- 礼物展示区域 -->
+        <div class="gifts-section">
+            <h2 class="section-title">特别鸣谢</h2>
+            <div class="gift-grid" id="giftGrid">
+                <!-- 礼物卡片将通过JS动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ICP备案 -->
+    <div class="icp">
+        <a href="http://www.beian.miit.gov.cn" class="icpnum" target="_blank" rel="nofollow">ICP备88888888号</a>
+    </div>
+
+    <!-- 左侧导航栏 -->
+    <nav class="left-navigation cover-navigation cover-navigation--primary">
+        <ul class="navigation">
+            <li class="navigation__item"><a href="                    " target="_blank" title="直播间">前往直播间</a></li>
+            <li class="navigation__item"><a href="javascript:void(0)" id="profileBtn" title="个人简介">我的名片</a></li>
+            <li class="navigation__item"><a href="javascript:void(0)" id="rewardBtn" title="赞赏码">赞赏投喂</a></li>
+            <li class="navigation__item"><a href="javascript:void(0)" id="qqGroupBtn" title="QQ群">我的小群</a></li>
+        </ul>
+    </nav>
+
+    <!-- 音乐入口按钮 -->
+    <div class="music-entry" id="musicEntry">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <!-- 全屏音乐播放器 -->
+    <div class="music-section" id="musicSection">
+        <div class="music-header">
+            音乐库
+            <div class="close-music" id="closeMusic">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="song-list" id="songList">
+            <!-- 歌曲列表将通过JS动态生成 -->
+        </div>
+    </div>
+
+    <!-- 播放控制条 -->
+    <div class="player-controls" id="playerControls">
+        <div class="current-song" id="currentSong">未播放</div>
+
+        <button class="control-btn" id="prevBtn">
+            <i class="fas fa-step-backward"></i>
+        </button>
+        <button class="control-btn" id="playBtn">
+            <i class="fas fa-play"></i>
+        </button>
+        <button class="control-btn" id="nextBtn">
+            <i class="fas fa-step-forward"></i>
+        </button>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+        </div>
+
+        <div class="volume-container">
+            <i class="fas fa-volume-down"></i>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.7">
+            <i class="fas fa-volume-up"></i>
+        </div>
+    </div>
+
+    <!-- 赞赏码弹窗 -->
+    <div class="modal" id="rewardModal">
+        <span class="close-btn" id="closeReward"><i class="fas fa-times"></i></span>
+        <h2>感谢您的支持</h2>
+        <div class="qr-code">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <p class="modal-text">扫描二维码赞赏支持小苏</p>
+    </div>
+
+    <!-- QQ群弹窗 -->
+    <div class="modal" id="qqGroupModal">
+        <span class="close-btn" id="closeQQGroup"><i class="fas fa-times"></i></span>
+        <h2>加入我的QQ群</h2>
+        <div class="qr-code">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <p class="modal-text">QQ群号：12345678</p>
+        <p class="modal-text">扫描二维码或搜索群号加入</p>
+    </div>
+
+    <!-- 个人名片弹窗 -->
+    <div class="modal" id="profileModal">
+        <span class="close-btn" id="closeProfile"><i class="fas fa-times"></i></span>
+        <h2>个人介绍</h2>
+        <div class="profile-info">
+            <div><strong>昵称：</strong>小苏</div>
+            <div><strong>直播间ID：</strong>12345678</div>
+            <div><strong>个人UID：</strong>88888888</div>
+            <div><strong>性格特点：</strong>热情开朗，乐于助人，喜欢分享技术</div>
+            <div><strong>兴趣爱好：</strong>编程、音乐、游戏</div>
+            <div><strong>个人简介：</strong>我是小苏，一个热爱技术的开发者，喜欢探索新事物并与大家分享。</div>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- 后台管理面板 -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2 class="admin-title">后台管理</h2>
+            <span class="close-btn" id="closeAdmin"><i class="fas fa-times"></i></span>
+        </div>
+
+        <div class="admin-section">
+            <h3>礼物数据管理</h3>
+            <div class="form-group">
+                <label>支持者名称</label>
+                <input type="text" id="supporterName" placeholder="输入支持者名称">
+            </div>
+            <div class="form-group">
+                <label>礼物类型</label>
+                <input type="text" id="giftType" placeholder="例如：舰长、提督、总督">
+            </div>
+            <div class="form-group">
+                <label>礼物数量</label>
+                <input type="number" id="giftAmount" placeholder="输入礼物数量" min="1">
+            </div>
+            <button class="btn" id="addGiftBtn">添加礼物记录</button>
+        </div>
+
+        <div class="admin-section">
+            <h3>当前礼物列表</h3>
+            <div id="currentGifts">
+                <!-- 当前礼物列表 -->
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h3>音乐上传</h3>
+            <div class="form-group">
+                <label>歌曲标题</label>
+                <input type="text" id="songTitle" placeholder="输入歌曲标题">
+            </div>
+            <div class="form-group">
+                <label>艺术家</label>
+                <input type="text" id="songArtist" placeholder="输入艺术家名称">
+            </div>
+            <div class="form-group">
+                <label>上传音乐文件</label>
+                <input type="file" id="musicFile" accept="audio/*">
+            </div>
+            <button class="btn" id="uploadMusicBtn">上传音乐</button>
+        </div>
+    </div>
+
+    <!-- 背景元素 -->
+    <div class="landscape"></div>
+    <div class="filter"></div>
+    <canvas id="canvas"></canvas>
+
+    <!-- 恢复原有的星空背景JS -->
+    <script>
+    // 恢复原有的星空背景和鼠标移动特效
+    function Star(id, x, y) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.r = Math.floor(Math.random() * 2) + 1;
+        var alpha = (Math.floor(Math.random() * 10) + 1) / 10 / 2;
+        this.color = "rgba(255,255,255," + alpha + ")";
+    }
+
+    Star.prototype.draw = function() {
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = this.r * 2;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    Star.prototype.move = function() {
+        this.y -= .15;
+        if (this.y <= -10) this.y = HEIGHT + 10;
+        this.draw();
+    }
+
+    Star.prototype.die = function() {
+        stars[this.id] = null;
+        delete stars[this.id];
+    }
+
+    function Dot(id, x, y, r) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.r = Math.floor(Math.random() * 5) + 1;
+        this.maxLinks = 2;
+        this.speed = .5;
+        this.a = .5;
+        this.aReduction = .005;
+        this.color = "rgba(255,255,255," + this.a + ")";
+        this.linkColor = "rgba(255,255,255," + this.a / 4 + ")";
+
+        this.dir = Math.floor(Math.random() * 140) + 200;
+    }
+
+    Dot.prototype.draw = function() {
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = this.r * 2;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    Dot.prototype.link = function() {
+        if (this.id == 0) return;
+        var previousDot1 = getPreviousDot(this.id, 1);
+        var previousDot2 = getPreviousDot(this.id, 2);
+        var previousDot3 = getPreviousDot(this.id, 3);
+        if (!previousDot1) return;
+        ctx.strokeStyle = this.linkColor;
+        ctx.moveTo(previousDot1.x, previousDot1.y);
+        ctx.beginPath();
+        ctx.lineTo(this.x, this.y);
+        if (previousDot2 != false) ctx.lineTo(previousDot2.x, previousDot2.y);
+        if (previousDot3 != false) ctx.lineTo(previousDot3.x, previousDot3.y);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function getPreviousDot(id, stepback) {
+        if (id == 0 || id - stepback < 0) return false;
+        if (typeof dots[id - stepback] != "undefined") return dots[id - stepback];
+        else return false; //getPreviousDot(id - stepback);
+    }
+
+    Dot.prototype.move = function() {
+        this.a -= this.aReduction;
+        if (this.a <= 0) {
+            this.die();
+            return
+        }
+        this.color = "rgba(255,255,255," + this.a + ")";
+        this.linkColor = "rgba(255,255,255," + this.a / 4 + ")";
+        this.x = this.x + Math.cos(degToRad(this.dir)) * this.speed,
+        this.y = this.y + Math.sin(degToRad(this.dir)) * this.speed;
+
+        this.draw();
+        this.link();
+    }
+
+    Dot.prototype.die = function() {
+        dots[this.id] = null;
+        delete dots[this.id];
+    }
+
+    var canvas = document.getElementById('canvas'),
+    ctx = canvas.getContext('2d'),
+    WIDTH,
+    HEIGHT,
+    mouseMoving = false,
+    mouseMoveChecker,
+    mouseX,
+    mouseY,
+    stars = [],
+    initStarsPopulation = 80,
+    dots = [],
+    dotsMinDist = 2,
+    maxDistFromCursor = 50;
+
+    setCanvasSize();
+    init();
+
+    function setCanvasSize() {
+        WIDTH = document.documentElement.clientWidth,
+        HEIGHT = document.documentElement.clientHeight;
+
+        canvas.setAttribute("width", WIDTH);
+        canvas.setAttribute("height", HEIGHT);
+    }
+
+    function init() {
+        ctx.strokeStyle = "white";
+        ctx.shadowColor = "white";
+        for (var i = 0; i < initStarsPopulation; i++) {
+            stars[i] = new Star(i, Math.floor(Math.random() * WIDTH), Math.floor(Math.random() * HEIGHT));
+            //stars[i].draw();
+        }
+        ctx.shadowBlur = 0;
+        animate();
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+        for (var i in stars) {
+            stars[i].move();
+        }
+        for (var i in dots) {
+            dots[i].move();
+        }
+        drawIfMouseMoving();
+        requestAnimationFrame(animate);
+    }
+
+    window.onmousemove = function(e) {
+        mouseMoving = true;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        clearInterval(mouseMoveChecker);
+        mouseMoveChecker = setTimeout(function() {
+            mouseMoving = false;
+        },
+        100);
+    }
+
+    function drawIfMouseMoving() {
+        if (!mouseMoving) return;
+
+        if (dots.length == 0) {
+            dots[0] = new Dot(0, mouseX, mouseY);
+            dots[0].draw();
+            return;
+        }
+
+        var previousDot = getPreviousDot(dots.length, 1);
+        var prevX = previousDot.x;
+        var prevY = previousDot.y;
+
+        var diffX = Math.abs(prevX - mouseX);
+        var diffY = Math.abs(prevY - mouseY);
+
+        if (diffX < dotsMinDist || diffY < dotsMinDist) return;
+
+        var xVariation = Math.random() > .5 ? -1 : 1;
+        xVariation = xVariation * Math.floor(Math.random() * maxDistFromCursor) + 1;
+        var yVariation = Math.random() > .5 ? -1 : 1;
+        yVariation = yVariation * Math.floor(Math.random() * maxDistFromCursor) + 1;
+        dots[dots.length] = new Dot(dots.length, mouseX + xVariation, mouseY + yVariation);
+        dots[dots.length - 1].draw();
+        dots[dots.length - 1].link();
+    }
+    //setInterval(drawIfMouseMoving, 17);
+    function degToRad(deg) {
+        return deg * (Math.PI / 180);
+    }
+
+    window.addEventListener('resize', function() {
+        setCanvasSize();
+    });
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化艺术时钟
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const day = days[now.getDay()];
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const date = now.getDate();
+
+            document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clockDate').textContent = `${year}年${month}月${date}日 ${day}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 礼物数据
+        let giftData = [
+            { name: "榜一大哥", gift: "总督", icon: "fa-crown", amount: 1 },
+            { name: "技术宅", gift: "提督", icon: "fa-star", amount: 2 },
+            { name: "小苏真爱粉", gift: "舰长", icon: "fa-ship", amount: 5 },
+            { name: "开发大佬", gift: "舰长", icon: "fa-ship", amount: 3 },
+            { name: "设计达人", gift: "舰长", icon: "fa-ship", amount: 1 },
+            { name: "热心观众", gift: "小飞船", icon: "fa-rocket", amount: 10 },
+            { name: "编程爱好者", gift: "小飞船", icon: "fa-rocket", amount: 8 },
+            { name: "音乐发烧友", gift: "小飞船", icon: "fa-rocket", amount: 6 },
+            { name: "游戏高手", gift: "小飞船", icon: "fa-rocket", amount: 4 },
+            { name: "深夜水友", gift: "小飞船", icon: "fa-rocket", amount: 2 },
+            { name: "新晋粉丝", gift: "小飞船", icon: "fa-rocket", amount: 1 },
+            { name: "忠实观众", gift: "小飞船", icon: "fa-rocket", amount: 1 }
+        ];
+
+        // 生成礼物列表
+        function generateGiftList() {
+            const giftGrid = document.getElementById('giftGrid');
+            giftGrid.innerHTML = '';
+
+            giftData.forEach(gift => {
+                const giftCard = document.createElement('div');
+                giftCard.className = 'gift-card';
+                giftCard.innerHTML = `
+                    <div class="gift-icon">
+                        <i class="fas ${gift.icon}"></i>
+                    </div>
+                    <div class="gift-name">${gift.gift}</div>
+                    <div class="supporter">${gift.name}</div>
+                    <div class="gift-amount">数量: ${gift.amount}</div>
+                `;
+                giftGrid.appendChild(giftCard);
+            });
+        }
+
+        // 初始化礼物列表
+        generateGiftList();
+
+        // 音乐数据
+        const musicData = [
+            { title: "宁静时光", artist: "小苏", cover: "music1.jpg", file: "song1.mp3" },
+            { title: "清晨阳光", artist: "小苏", cover: "music2.jpg", file: "song2.mp3" },
+            { title: "月光奏鸣曲", artist: "贝多芬", cover: "music3.jpg", file: "song3.mp3" },
+            { title: "夏日记忆", artist: "小苏", cover: "music4.jpg", file: "song4.mp3" },
+            { title: "未来之声", artist: "电子乐队", cover: "music5.jpg", file: "song5.mp3" },
+            { title: "蓝色多瑙河", artist: "约翰·施特劳斯", cover: "music6.jpg", file: "song6.mp3" },
+            { title: "星空下的约定", artist: "小苏", cover: "music7.jpg", file: "song7.mp3" },
+            { title: "雨后彩虹", artist: "自然之声", cover: "music8.jpg", file: "song8.mp3" },
+            { title: "城市夜晚", artist: "都市旋律", cover: "music9.jpg", file: "song9.mp3" },
+            { title: "山林漫步", artist: "自然之声", cover: "music10.jpg", file: "song10.mp3" },
+            { title: "海边日出", artist: "小苏", cover: "music11.jpg", file: "song11.mp3" },
+            { title: "钢琴独奏", artist: "古典大师", cover: "music12.jpg", file: "song12.mp3" }
+        ];
+
+        // 初始化音乐播放器
+        const audio = new Audio();
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progress = document.getElementById('progress');
+        const progressBar = document.getElementById('progressBar');
+        const currentSongEl = document.getElementById('currentSong');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalTimeEl = document.getElementById('totalTime');
+        const songList = document.getElementById('songList');
+        const musicSection = document.getElementById('musicSection');
+        const musicEntry = document.getElementById('musicEntry');
+        const closeMusic = document.getElementById('closeMusic');
+
+        let isPlaying = false;
+        let currentSongIndex = 0;
+
+        // 生成歌曲列表
+        function generateSongList() {
+            songList.innerHTML = '';
+            musicData.forEach((song, index) => {
+                const songItem = document.createElement('div');
+                songItem.className = 'song-item';
+                if (index === currentSongIndex) {
+                    songItem.classList.add('playing');
+                }
+                songItem.dataset.index = index;
+
+                songItem.innerHTML = `
+                    <div class="song-cover">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="song-info">
+                        <div class="song-title">${song.title}</div>
+                        <div class="song-artist">${song.artist}</div>
+                    </div>
+                `;
+
+                songItem.addEventListener('click', () => playSong(index));
+                songList.appendChild(songItem);
+            });
+        }
+
+        // 播放指定歌曲
+        function playSong(index) {
+            currentSongIndex = index;
+            const song = musicData[currentSongIndex];
+            audio.src = 'music/' + song.file;
+            audio.play();
+            isPlaying = true;
+            updatePlayBtn();
+
+            // 更新当前歌曲显示
+            currentSongEl.textContent = `${song.title} - ${song.artist}`;
+
+            // 更新歌曲列表中的选中状态
+            document.querySelectorAll('.song-item').forEach((item, i) => {
+                if (i === currentSongIndex) {
+                    item.classList.add('playing');
+                } else {
+                    item.classList.remove('playing');
+                }
+            });
+
+            // 如果音乐面板没打开，打开它
+            if (!musicSection.classList.contains('show')) {
+                musicSection.classList.add('show');
+            }
+        }
+
+        // 更新播放按钮图标
+        function updatePlayBtn() {
+            playBtn.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        }
+
+        // 播放/暂停
+        playBtn.addEventListener('click', () => {
+            if (audio.src) {
+                if (isPlaying) {
+                    audio.pause();
+                } else {
+                    audio.play();
+                }
+                isPlaying = !isPlaying;
+                updatePlayBtn();
+            }
+        });
+
+        // 上一首
+        prevBtn.addEventListener('click', () => {
+            currentSongIndex = (currentSongIndex - 1 + musicData.length) % musicData.length;
+            playSong(currentSongIndex);
+        });
+
+        // 下一首
+        nextBtn.addEventListener('click', () => {
+            currentSongIndex = (currentSongIndex + 1) % musicData.length;
+            playSong(currentSongIndex);
+        });
+
+        // 音量控制
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+        });
+
+        // 更新进度条
+        audio.addEventListener('timeupdate', () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = `${percent}%`;
+
+            // 更新时间显示
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+            totalTimeEl.textContent = formatTime(audio.duration);
+        });
+
+        // 点击进度条跳转
+        progressBar.addEventListener('click', (e) => {
+            const width = progressBar.clientWidth;
+            const clickX = e.offsetX;
+            audio.currentTime = (clickX / width) * audio.duration;
+        });
+
+        // 格式化时间
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        // 歌曲结束自动下一首
+        audio.addEventListener('ended', () => {
+            nextBtn.click();
+        });
+
+        // 初始化音乐播放器
+        generateSongList();
+        audio.volume = volumeSlider.value;
+
+        // 显示/隐藏音乐面板
+        musicEntry.addEventListener('click', () => {
+            musicSection.classList.toggle('show');
+        });
+
+        closeMusic.addEventListener('click', () => {
+            musicSection.classList.remove('show');
+        });
+
+        // 确保音频对象在用户交互后可以播放
+        document.body.addEventListener('click', function initAudio() {
+            if (audio.src) {
+                audio.play().then(() => {
+                    audio.pause();
+                    isPlaying = false;
+                    updatePlayBtn();
+                }).catch(e => {
+                    console.log("Autoplay prevented, but ready to play on user interaction");
+                });
+            }
+            document.body.removeEventListener('click', initAudio);
+        });
+
+        // 显示弹窗函数
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+            document.getElementById('overlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 隐藏弹窗函数
+        function hideModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('show');
+            });
+            document.getElementById('overlay').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 显示后台管理面板
+        function showAdminPanel() {
+            document.getElementById('adminPanel').classList.add('show');
+            updateCurrentGifts();
+        }
+
+        // 隐藏后台管理面板
+        function hideAdminPanel() {
+            document.getElementById('adminPanel').classList.remove('show');
+        }
+
+        // 更新当前礼物列表
+        function updateCurrentGifts() {
+            const currentGifts = document.getElementById('currentGifts');
+            currentGifts.innerHTML = '';
+
+            giftData.forEach((gift, index) => {
+                const giftItem = document.createElement('div');
+                giftItem.className = 'gift-item';
+                giftItem.innerHTML = `
+                    <div><strong>${gift.name}</strong> - ${gift.gift} × ${gift.amount}</div>
+                    <button class="btn remove-gift" data-index="${index}">删除</button>
+                `;
+                currentGifts.appendChild(giftItem);
+            });
+
+            // 添加删除事件
+            document.querySelectorAll('.remove-gift').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    giftData.splice(index, 1);
+                    updateCurrentGifts();
+                    generateGiftList();
+                    // 在实际应用中，这里应该保存到服务器
+                });
+            });
+        }
+
+        // 事件监听器
+        document.getElementById('rewardBtn').addEventListener('click', () => showModal('rewardModal'));
+        document.getElementById('qqGroupBtn').addEventListener('click', () => showModal('qqGroupModal'));
+        document.getElementById('profileBtn').addEventListener('click', () => showModal('profileModal'));
+        document.getElementById('adminBtn').addEventListener('click', showAdminPanel);
+
+        document.getElementById('closeReward').addEventListener('click', hideModals);
+        document.getElementById('closeQQGroup').addEventListener('click', hideModals);
+        document.getElementById('closeProfile').addEventListener('click', hideModals);
+        document.getElementById('closeAdmin').addEventListener('click', hideAdminPanel);
+        document.getElementById('overlay').addEventListener('click', hideModals);
+
+        // 添加礼物记录
+        document.getElementById('addGiftBtn').addEventListener('click', function() {
+            const supporterName = document.getElementById('supporterName').value;
+            const giftType = document.getElementById('giftType').value;
+            const giftAmount = document.getElementById('giftAmount').value;
+
+            if (supporterName && giftType && giftAmount) {
+                const icons = ['fa-crown', 'fa-star', 'fa-ship', 'fa-rocket', 'fa-gem', 'fa-gift'];
+                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+
+                giftData.unshift({
+                    name: supporterName,
+                    gift: giftType,
+                    icon: randomIcon,
+                    amount: parseInt(giftAmount)
+                });
+
+                // 重置表单
+                document.getElementById('supporterName').value = '';
+                document.getElementById('giftType').value = '';
+                document.getElementById('giftAmount').value = '';
+
+                // 更新列表
+                generateGiftList();
+                updateCurrentGifts();
+
+                // 在实际应用中，这里应该保存到服务器
+                alert('礼物记录添加成功！');
+            } else {
+                alert('请填写所有字段！');
+            }
+        });
+
+        // 音乐上传功能
+        document.getElementById('uploadMusicBtn').addEventListener('click', function() {
+            const songTitle = document.getElementById('songTitle').value;
+            const songArtist = document.getElementById('songArtist').value;
+            const musicFile = document.getElementById('musicFile').files[0];
+
+            if (songTitle && songArtist && musicFile) {
+                // 在实际应用中，这里应该将文件上传到服务器
+                alert(`音乐 "${songTitle}" 上传成功！`);
+
+                // 重置表单
+                document.getElementById('songTitle').value = '';
+                document.getElementById('songArtist').value = '';
+                document.getElementById('musicFile').value = '';
+            } else {
+                alert('请填写所有字段并选择音乐文件！');
+            }
+        });
+    });
+    </script>
+</body>
+</html>
